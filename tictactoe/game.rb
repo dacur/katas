@@ -1,9 +1,13 @@
 class Game
 	require './board.rb'
-	attr_accessor :board
+	# attr_accessor :board
+
+	def initialize
+		@board = Board.new
+	end
 
 	def board 
-		Board.new
+		@board.positions
 	end
 
 end
