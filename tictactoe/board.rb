@@ -5,6 +5,12 @@ class Board
 	end
 
 	def show(board)
-		
+		built = [board[0], " | ", board[1], " | ", board[2]]
+		string_board = ""
+		built.each do |b|
+			string_board += b.to_s
+		end
+
+		p string_board
 	end
 end
