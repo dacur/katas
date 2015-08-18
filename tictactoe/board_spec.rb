@@ -9,7 +9,7 @@ RSpec.describe Board do
 	end
 	describe "#show" do
 		it "takes in an array of positions and uses them to print out the board to the console" do
-			expect(board.show([1, 2, 3])).to eq("1 | 2 | 3")
+			expect(board.show([1, 2, 3])).to eq("1 | 2 | 3\n---------")
 		end
 	end
 end

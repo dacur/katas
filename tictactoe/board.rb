@@ -6,11 +6,13 @@ class Board
 
 	def show(board)
 		built = [board[0], " | ", board[1], " | ", board[2]]
+		line = "\n---------"
 		string_board = ""
 		built.each do |b|
 			string_board += b.to_s
 		end
 
-		p string_board
+		p string_board + line
+		
 	end
 end
