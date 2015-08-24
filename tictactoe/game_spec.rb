@@ -10,7 +10,7 @@ RSpec.describe Game do
 			expect(game.player).to be_a(Player)
 		end
 		it "asks if you want to go first" do
-			expect(game.player.order).to eq("Would you like to go first (y/n)?")
+			expect(game.player.set_order).to eq("Would you like to go first (y/n)?")
 		end
 	end
 
