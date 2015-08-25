@@ -12,14 +12,13 @@ class Player
 	end
 
 	def check_order
-		"hello"
-		# if @order == "y"
-		# 	@order = true
-		# elsif @order == "n"
-		# 	@order = false
-		# else
-		# 	get_order
-		# end
+		if @order == "y"
+			@order = true
+		elsif @order == "n"
+			@order = false
+		else
+			get_order
+		end
 	end
 
 	def order
