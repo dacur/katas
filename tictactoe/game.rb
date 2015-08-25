@@ -6,7 +6,7 @@ class Game
 	def initialize
 		@board = Board.new
 		@player = Player.new
-		order
+		@player.get_order
 		# first_turn
 	end
 
