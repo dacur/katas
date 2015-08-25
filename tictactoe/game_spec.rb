@@ -3,7 +3,7 @@ require './game.rb'
 RSpec.describe Game do 
 	subject(:game) {Game.new}
 	let(:player) {Player.new}
-	before { allow(player.set_order).to receive(:gets) {"y"} }
+	# before { allow(player.set_order).to receive(:gets) {"y"} }
 	describe "#new" do
 		it "creates a new board" do
 			expect(game.board).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -12,9 +12,10 @@ RSpec.describe Game do
 			expect(player).to be_a(Player)
 		end
 		it "calls order" do
+			expect(game).to receive(:order)
 			# expect(order).to receive(:p).with("Would you like to go first (y/n)?")
-			expect(game.order).to be_truthy
-			game
+			# expect(game).to receive(player.set_order)
+			# game.order
 		end
 
 	end
