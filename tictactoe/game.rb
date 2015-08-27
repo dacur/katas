@@ -8,16 +8,16 @@ class Game
 		@player = Player.new
 	end
 
-	def first_turn
-		if @order == "y"
-			player_turn
-		elsif @order == "n"
-			robot_turn
-		else
-			@order = @player.set_order
-			first_turn
-		end
-	end
+	# def first_turn
+	# 	if @order == "y"
+	# 		player_turn
+	# 	elsif @order == "n"
+	# 		robot_turn
+	# 	else
+	# 		@order = @player.set_order
+	# 		first_turn
+	# 	end
+	# end
 
 	def player_turn
 		positions = [1, 2, 3, 4, 5, 6, 7, 8, 9] 
@@ -32,7 +32,16 @@ class Game
 	end
 
 	def check_availability(choice)
-		"yo"
+		if @board.positions.include? choice
+			make_move(choice)
+		else
+			player_turn
+		end
+
+	end
+
+	def make_move(choice)
+		@board.positions
 	end
 
 	# def robot_turn
