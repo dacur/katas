@@ -24,22 +24,24 @@ RSpec.describe Game do
 	# end
 
 	describe "#player_turn" do
-		# before { allow(game).to receive(:gets) {"1"} }
+		before { allow(game).to receive(:gets) {"1"} }
 		it "asks the player which position to play" do
 			expect(game).to receive(:p).with("Please enter a number between 1 and 9.")
 			game.player_turn
 		end
-		before { allow(game.player_turn).to receive(:gets) {"1"} }
+		# before { allow(game.player_turn).to receive(:gets) {"1"} }
 		describe "validates user input" do
 			it "checks availability if it is between 1 and 9" do
+				allow(game).to receive(:gets){"1"}
 				choice = 1
 				expect(game).to receive(:check_availability){choice}
 				game.player_turn
 			end
-		# 	it "is invalid otherwise" do
-		# 		allow(player).to receive(:gets) {"a"}
-		# 		expect(player).to receive(:player_turn)
-		# 	end
+			it "is invalid otherwise" do
+				allow(game).to receive(:gets) {"a"}
+				expect(game).to receive(:player_turn)
+				game.player_turn
+			end
 		end
 		# it "fills that spot on the board"
 	end
