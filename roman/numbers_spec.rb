@@ -18,5 +18,14 @@ RSpec.describe Numbers do
 		it "converts 18 to XVIII" do
 			expect(number.romanize(18)).to eq("XVIII")
 		end
+		it "converts 37 to XXXVII" do
+			expect(number.romanize(37)).to eq("XXXVII")
+		end
+		it "converts 75 to LXXV" do
+			expect(number.romanize(75)).to eq("LXXV")
+		end
+		it "converts 225 to CCXXV" do
+			expect(number.romanize(225)).to eq("CCXXV")
+		end
 	end
 end
