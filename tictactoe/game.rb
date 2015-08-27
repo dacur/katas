@@ -6,20 +6,18 @@ class Game
 	def initialize
 		@board = Board.new
 		@player = Player.new
-		@player.get_order
-		# first_turn
 	end
 
-	# def first_turn
-	# 	if @order == "y"
-	# 		player_turn
-	# 	elsif @order == "n"
-	# 		robot_turn
-	# 	else
-	# 		@order = @player.set_order
-	# 		first_turn
-	# 	end
-	# end
+	def first_turn
+		if @order == "y"
+			player_turn
+		elsif @order == "n"
+			robot_turn
+		else
+			@order = @player.set_order
+			first_turn
+		end
+	end
 
 	# def player_turn
 	# 	positions = [1, 2, 3, 4, 5, 6, 7, 8, 9] 
@@ -42,7 +40,7 @@ class Game
 	# end
 
 	def order
-		@player.set_order
+		@player.get_order
 	end
 
 	def board 

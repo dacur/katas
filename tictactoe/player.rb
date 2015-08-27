@@ -1,5 +1,5 @@
 class Player
-	attr_reader :player_first
+	attr_reader :player_first, :get_order
 
 	def get_order
 		p "Would you like to go first (y/n)?"
