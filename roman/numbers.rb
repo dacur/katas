@@ -2,7 +2,7 @@ class Numbers
 	attr_accessor :romanize
 
 	def romanize(number)
-		romans = {1000 => "M", 1 => "I"}
+		romans = {1000 => "M", 10 => "X", 9 => "IX", 5=> "V", 4 => "IV", 1 => "I"}
 		roman_numeral = ""
 		romans.each do |key, value|
 			number_of_rn = number/key
