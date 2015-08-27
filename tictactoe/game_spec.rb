@@ -7,7 +7,7 @@ RSpec.describe Game do
 	# before { allow(player.get_order).to receive(:gets) {"y"} }
 	describe "#new" do
 		it "creates a new board" do
-			expect(game.board).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
+			expect(game.board.positions).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
 		end
 		it "creates a new player" do
 			expect(player).to be_a(Player)
@@ -48,8 +48,9 @@ RSpec.describe Game do
 
 	describe "#make_move" do
 		it "accepts a number and changes the board to reflect the move" do
-			allow(game).to receive(:make_move).with(1)
-			expect(board.positions).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9] )
+			game.make_move(1)
+			expect(game.current_board).to eq(["X", 2, 3, 4, 5, 6, 7, 8, 9])
+
 		end
 	end
 

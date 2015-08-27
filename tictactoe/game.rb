@@ -1,11 +1,13 @@
 class Game
 	require './board.rb'
 	require './player.rb'
-	attr_reader :order
+	attr_reader :order, :board, :player
+	attr_reader :current_board
 
 	def initialize
 		@board = Board.new
 		@player = Player.new
+		@current_board = @board.positions
 	end
 
 	# def first_turn
@@ -41,7 +43,7 @@ class Game
 	end
 
 	def make_move(choice)
-		@board.positions
+		current_board[choice-1] = "X"
 	end
 
 	# def robot_turn
@@ -52,13 +54,7 @@ class Game
 		@player.get_order
 	end
 
-	def board 
-		@board.positions
-	end
 
-	def player
-		@player
-	end
 
 end
 
