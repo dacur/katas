@@ -27,5 +27,20 @@ RSpec.describe Numbers do
 		it "converts 225 to CCXXV" do
 			expect(number.romanize(225)).to eq("CCXXV")
 		end
+		it "converts 450 to CDL" do
+			expect(number.romanize(450)).to eq("CDL")
+		end
+		it "converts 500 to D" do
+			expect(number.romanize(500)).to eq("D")
+		end
+		it "converts 700 to DCC" do 
+			expect(number.romanize(700)).to eq("DCC")
+		end
+		it "converts 900 to CM" do
+			expect(number.romanize(900)).to eq("CM")
+		end
+		it "converts 1000 to M" do 
+			expect(number.romanize(1000)).to eq("M")
+		end
 	end
 end
