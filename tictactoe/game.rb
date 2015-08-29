@@ -45,7 +45,8 @@ class Game
 	end
 
 	def check_if_winner
-		"hello"
+		# @board.winning_moves
+		# @current_board = []
 	end
 
 	def robot_turn
