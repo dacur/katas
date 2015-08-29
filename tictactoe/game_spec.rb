@@ -51,7 +51,10 @@ RSpec.describe Game do
 		it "accepts a number and changes the board to reflect the move" do
 			game.make_move(1)
 			expect(game.current_board).to eq(["X", 2, 3, 4, 5, 6, 7, 8, 9])
-
+		end
+		it "checks to see if we have a winner" do
+			expect(game).to receive(:check_if_winner)
+			game.make_move(1)
 		end
 	end
 

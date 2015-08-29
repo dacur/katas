@@ -41,6 +41,11 @@ class Game
 
 	def make_move(choice)
 		current_board[choice-1] = "X"
+		check_if_winner
+	end
+
+	def check_if_winner
+		"hello"
 	end
 
 	def robot_turn
