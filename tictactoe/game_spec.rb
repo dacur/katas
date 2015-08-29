@@ -55,6 +55,23 @@ RSpec.describe Game do
 		end
 	end
 
+	describe "#first_turn" do
+		context "order is true" do 
+			it "is the player's turn" do
+				allow(game).to receive(:order) {true}
+				expect(game).to receive(:player_turn)
+				game.first_turn
+			end
+		end
+		context "order is false" do 
+			it "is the robot's turn" do
+				allow(game).to receive(:order) {false}
+				expect(game).to receive(:robot_turn)
+				game.first_turn
+			end
+		end
+	end
+
 
 end
 

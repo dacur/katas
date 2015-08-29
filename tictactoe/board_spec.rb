@@ -14,6 +14,3 @@ RSpec.describe Board do
 	end
 end
 
-# it "puts the lotion on its skin" do
-# 	expect(hostage.skin).to eq("smooth")
-# end
