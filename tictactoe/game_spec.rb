@@ -77,12 +77,14 @@ RSpec.describe Game do
 
 	describe "#check_if_winner" do
 		it "knows the winning moves" do
-			expect(board.winning_moves).to eq([[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], 
+			expect(game.winning_moves).to eq([[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], 
 			[1,5,9], [3,5,7]])
 		end
 		it "checks if a player has won the game" do
-			allow(game).to receive(:current_board) {["X, X, X, 4, 5, 6, 7, 8, 9"]}
-			expect(game.check_if_winner).to be_truthy
+			game.current_board = ["X", "X", "X", 4, 5, 6, 7, 8, 9]
+			# game.check_if_winner
+			expect(game).to receive(:game_over)
+			game.check_if_winner
 		end
 	end
 

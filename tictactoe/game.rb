@@ -1,13 +1,19 @@
 class Game
 	require './board.rb'
 	require './player.rb'
-	attr_reader :board, :player, :current_board
-	attr_writer :order 
+	attr_reader :board, :player, :winning_moves
+	attr_writer :order
+	attr_accessor :current_board 
 
+	#########################################################
+	#  REMEMBER TO SUBTRACT 1 FROM THE ARRAY SINCE IT'S NUMBERED 1-9  #
+	#########################################################
+	
 	def initialize
 		@board = Board.new
 		@player = Player.new
 		@current_board = @board.positions
+		@winning_moves = @board.winning_moves
 	end
 
 	def first_turn
@@ -45,8 +51,16 @@ class Game
 	end
 
 	def check_if_winner
-		# @board.winning_moves
-		# @current_board = []
+		@winning_moves.each do |move|
+			if [ @current_board[move[0]-1],@current_board[move[1]-1], 
+				@current_board[move[2]-1] ].uniq.count == 1
+				game_over
+			end
+		end
+	end
+
+	def game_over
+		"hello"
 	end
 
 	def robot_turn
