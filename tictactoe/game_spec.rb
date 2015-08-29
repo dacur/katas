@@ -1,4 +1,5 @@
 require './game.rb'
+# require 'byebug'
 
 RSpec.describe Game do 
 	subject(:game) {Game.new}
@@ -14,15 +15,15 @@ RSpec.describe Game do
 		end
 	end
 
-	# *** CURRENTLY RETURNS NIL ***
-	# describe "#order" do
-	# 	before { allow(player).to receive(:gets) {"y"} }
-	# 	it "asks the player if he or she wants to go first and sets order" do
-	# 		expect(player.player_first).to be_truthy
-	# 		expect(game.order).to be_truthy
-	# 		game.order
-	# 	end
-	# end
+	describe "#order" do
+		let(:player) {game.player}
+		before { allow(player).to receive(:gets) {"y"} }
+		it "asks the player if he or she wants to go first and sets order" do
+			game.order
+			expect(player.player_first).to be_truthy
+			expect(game.order).to be_truthy
+		end
+	end
 
 	describe "#player_turn" do
 		before { allow(game).to receive(:gets) {"1"} }
