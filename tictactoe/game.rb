@@ -3,17 +3,19 @@ class Game
 	require './player.rb'
 	attr_reader :board, :player, :winning_moves
 	attr_writer :order
-	attr_accessor :current_board 
+	attr_accessor :current_board, :choice
 
 	#########################################################
 	#  REMEMBER TO SUBTRACT 1 FROM THE ARRAY SINCE IT'S NUMBERED 1-9  #
 	#########################################################
-	
+
 	def initialize
 		@board = Board.new
 		@player = Player.new
 		@current_board = @board.positions
 		@winning_moves = @board.winning_moves
+		@player_moves = []
+		@robot_moves = []
 	end
 
 	def first_turn
@@ -64,7 +66,40 @@ class Game
 	end
 
 	def robot_turn
-		"here too"
+		#loop through winning combos and see if player moves contains 2 of 3. if so, play 3rd space.  if not, play 1st preferred space available.
+		@choice = nil
+		
+		#if robot can win, it will do so.
+		@winning_moves.each do |wc|
+			@remainder = wc - @robot_moves
+			if @remainder.size == 1 && @current_board.include?(@remainder[0])
+				@choice = @remainder[0]
+				break
+			end
+		end
+
+		#if not and player can win, it will block player.
+		if @choice == nil
+			@winning_moves.each do |wc|
+				@remainder = wc - @player_moves
+				if @remainder.size == 1 && @current_board.include?(@remainder[0])
+					@choice = @remainder[0]
+					break
+				end
+			end
+		end
+		#if neither are true, robot will play next best move.
+		if @choice == nil
+			preferred_remaining = @preferred_spaces - (@player_moves + @robot_moves)
+			@choice = preferred_remaining[0]
+		end
+		@choice
+		# @current_board = @current_board - [@choice.to_i]		
+		# "I choose space #{@choice}.\n".slow
+		# @robot_moves.push(@choice.to_i)
+		
+		# @board.play(@choice, "O")
+		# @current_player = "robot"
 	end
 
 	def order
