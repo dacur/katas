@@ -16,6 +16,7 @@ class Game
 		@winning_moves = @board.winning_moves
 		@player_moves = []
 		@robot_moves = []
+		@preferred_spaces = @board.preferred_spaces
 	end
 
 	def first_turn
@@ -93,7 +94,7 @@ class Game
 			preferred_remaining = @preferred_spaces - (@player_moves + @robot_moves)
 			@choice = preferred_remaining[0]
 		end
-		@choice
+		
 		# @current_board = @current_board - [@choice.to_i]		
 		# "I choose space #{@choice}.\n".slow
 		# @robot_moves.push(@choice.to_i)

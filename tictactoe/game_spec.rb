@@ -90,8 +90,8 @@ RSpec.describe Game do
 
 	describe "#robot_turn" do
 		it "takes the first move and chooses the center space" do
+			game.robot_turn
 			expect(game.choice).to eq(5)
-			game.choice
 		end
 	end
 
