@@ -103,6 +103,12 @@ RSpec.describe Game do
 			expect(game).to receive(:p).with("I choose space 5.\n")
 			game.robot_turn
 		end
+		it "adds the robot's choice to robot's moves" do
+			allow(game).to receive(:choice){5}
+			game.robot_turn
+			expect(game.robot_moves).to eq([5])
+			
+		end
 	end
 
 	describe "#game_over" do

@@ -1,7 +1,7 @@
 class Game
 	require './board.rb'
 	require './player.rb'
-	attr_reader :board, :player, :winning_moves
+	attr_reader :board, :player, :winning_moves, :robot_moves, :player_moves
 	attr_writer :order
 	attr_accessor :current_board, :choice, :current_player
 
@@ -97,7 +97,7 @@ class Game
 		
 		@current_board[@choice-1] = "O"
 		p "I choose space #{@choice}.\n"
-		# @robot_moves.push(@choice.to_i)
+		@robot_moves.push(@choice.to_i)
 		
 		# @board.play(@choice, "O")
 		# @current_player = "robot"
