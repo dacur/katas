@@ -29,6 +29,7 @@ RSpec.describe Game do
 		before { allow(game).to receive(:gets) {"1"} }
 		it "asks the player which position to play" do
 			expect(game).to receive(:p).with("Please enter a number between 1 and 9.")
+			expect(game).to receive(:check_availability).with(1)
 			game.player_turn
 		end
 		# before { allow(game.player_turn).to receive(:gets) {"1"} }
@@ -49,11 +50,17 @@ RSpec.describe Game do
 
 	describe "#make_move" do
 		it "accepts a number and changes the board to reflect the move" do
+			expect(game).to receive(:robot_turn)
 			game.make_move(1)
 			expect(game.current_board).to eq(["X", 2, 3, 4, 5, 6, 7, 8, 9])
 		end
 		it "checks to see if we have a winner" do
-			expect(game).to receive(:check_if_winner)
+			expect(game).to receive(:game_over?).exactly(2).times
+			expect(game).to receive(:player_turn)
+			game.make_move(1)
+		end
+		it "is the robot's turn if the player hasn't won" do
+			expect(game).to receive(:robot_turn)
 			game.make_move(1)
 		end
 	end
@@ -75,56 +82,66 @@ RSpec.describe Game do
 		end
 	end
 
-	describe "#check_if_winner" do
+	describe "#game_over?" do
 		it "knows the winning moves" do
 			expect(game.winning_moves).to eq([[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], 
 			[1,5,9], [3,5,7]])
 		end
 		it "checks if a player has won the game" do
 			game.current_board = ["X", "X", "X", 4, 5, 6, 7, 8, 9]
-			# game.check_if_winner
-			expect(game).to receive(:game_over)
-			game.check_if_winner
+			# game.game_over?
+			expect(game).to receive(:end_game_message)
+			expect(game.game_over?).to eq(true)
 		end
 	end
 
 	describe "#robot_turn" do
 		it "takes the first move and chooses the center space" do
+			expect(game).to receive(:player_turn)
 			game.robot_turn
 			expect(game.choice).to eq(5)
 		end
 		it "updates the current board to include the robot's choice" do
+			expect(game).to receive(:player_turn)
 			game.robot_turn
 			allow(game).to receive(:choice){5}
 			expect(game.current_board).to eq([1, 2, 3, 4, "O", 6, 7, 8, 9])
 		end
 		it "says which space it has chosen" do
+			expect(game).to receive(:player_turn)
 			allow(game).to receive(:choice){5}
 			expect(game).to receive(:p).with("I choose space 5.\n")
 			game.robot_turn
 		end
 		it "adds the robot's choice to robot's moves" do
+			expect(game).to receive(:player_turn)
 			allow(game).to receive(:choice){5}
 			game.robot_turn
 			expect(game.robot_moves).to eq([5])
 			
 		end
 		it "checks to see if the robot won" do
-			expect(game).to receive(:check_if_winner)
+			expect(game).to receive(:player_turn)
+			expect(game).to receive(:game_over?)
 			game.robot_turn
 		end
 		it "sets the current player at the end of the turn" do
+			expect(game).to receive(:player_turn)
 			game.robot_turn
 			expect(game.current_player).to eq("player")
 		end
+		it "is the player's turn if the robot doesn't win" do 	
+			expect(game).to receive(:player_turn)
+			game.robot_turn
+		end
 	end
 
-	describe "#game_over" do
+	describe "#end_game_message" do
 		it "Tells the current player he or she won" do
 			# allow(game).to receive(:current_player){"robot"}
 			game.current_player = "robot"
-			game.game_over
-			expect(game.game_over).to eq("Congratulations robot, you won!")
+			game.end_game_message
+			expect(game.end_game_message).to eq("Congratulations robot, you won!")
 		end
 	end
 

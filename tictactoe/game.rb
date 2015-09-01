@@ -1,7 +1,9 @@
 class Game
 	require './board.rb'
 	require './player.rb'
-	attr_reader :board, :player, :winning_moves, :robot_moves, :player_moves
+	require 'byebug'
+	attr_reader :board, :player, :winning_moves, :robot_moves, :player_moves, 
+		:robot_turn, :player_turn
 	attr_writer :order
 	attr_accessor :current_board, :choice, :current_player
 
@@ -50,24 +52,28 @@ class Game
 
 	def make_move(choice)
 		current_board[choice-1] = "X"
-		check_if_winner
+		robot_turn unless game_over?
 	end
 
-	def check_if_winner
+	def game_over?
+		over = false
 		@winning_moves.each do |move|
 			if [ @current_board[move[0]-1],@current_board[move[1]-1], 
 				@current_board[move[2]-1] ].uniq.count == 1
-				game_over
+				end_game_message
+				over = true
 			end
 		end
+		over
 	end
 
-	def game_over
+	def end_game_message
 		"Congratulations #{@current_player}, you won!"
 	end
 
 	def robot_turn
 		#loop through winning combos and see if player moves contains 2 of 3. if so, play 3rd space.  if not, play 1st preferred space available.
+		# byebug
 		@choice = nil
 		
 		#if robot can win, it will do so.
@@ -98,11 +104,10 @@ class Game
 		@current_board[@choice-1] = "O"
 		p "I choose space #{@choice}.\n"
 		@robot_moves.push(@choice.to_i)
-		check_if_winner
-		@current_player = "player"
-		
-		# @board.play(@choice, "O")
-		# @current_player = "robot"
+		unless game_over?
+			@current_player = "player"
+			player_turn
+		end
 	end
 
 	def order
