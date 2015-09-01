@@ -93,6 +93,16 @@ RSpec.describe Game do
 			game.robot_turn
 			expect(game.choice).to eq(5)
 		end
+		it "updates the current board to include the robot's choice" do
+			game.robot_turn
+			allow(game).to receive(:choice){5}
+			expect(game.current_board).to eq([1, 2, 3, 4, "O", 6, 7, 8, 9])
+		end
+		it "says which space it has chosen" do
+			allow(game).to receive(:choice){5}
+			expect(game).to receive(:p).with("I choose space 5.\n")
+			game.robot_turn
+		end
 	end
 
 	describe "#game_over" do

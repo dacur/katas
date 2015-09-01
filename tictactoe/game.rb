@@ -95,8 +95,8 @@ class Game
 			@choice = preferred_remaining[0]
 		end
 		
-		# @current_board = @current_board - [@choice.to_i]		
-		# "I choose space #{@choice}.\n".slow
+		@current_board[@choice-1] = "O"
+		p "I choose space #{@choice}.\n"
 		# @robot_moves.push(@choice.to_i)
 		
 		# @board.play(@choice, "O")
