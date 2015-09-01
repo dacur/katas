@@ -109,6 +109,14 @@ RSpec.describe Game do
 			expect(game.robot_moves).to eq([5])
 			
 		end
+		it "checks to see if the robot won" do
+			expect(game).to receive(:check_if_winner)
+			game.robot_turn
+		end
+		it "sets the current player at the end of the turn" do
+			game.robot_turn
+			expect(game.current_player).to eq("player")
+		end
 	end
 
 	describe "#game_over" do

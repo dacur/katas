@@ -98,6 +98,8 @@ class Game
 		@current_board[@choice-1] = "O"
 		p "I choose space #{@choice}.\n"
 		@robot_moves.push(@choice.to_i)
+		check_if_winner
+		@current_player = "player"
 		
 		# @board.play(@choice, "O")
 		# @current_player = "robot"
