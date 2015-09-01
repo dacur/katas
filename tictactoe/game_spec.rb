@@ -95,6 +95,15 @@ RSpec.describe Game do
 		end
 	end
 
+	describe "#game_over" do
+		it "Tells the current player he or she won" do
+			# allow(game).to receive(:current_player){"robot"}
+			game.current_player = "robot"
+			game.game_over
+			expect(game.game_over).to eq("Congratulations robot, you won!")
+		end
+	end
+
 end
 
 

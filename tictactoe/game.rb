@@ -3,7 +3,7 @@ class Game
 	require './player.rb'
 	attr_reader :board, :player, :winning_moves
 	attr_writer :order
-	attr_accessor :current_board, :choice
+	attr_accessor :current_board, :choice, :current_player
 
 	#########################################################
 	#  REMEMBER TO SUBTRACT 1 FROM THE ARRAY SINCE IT'S NUMBERED 1-9  #
@@ -63,7 +63,7 @@ class Game
 	end
 
 	def game_over
-		"hello"
+		"Congratulations #{@current_player}, you won!"
 	end
 
 	def robot_turn
