@@ -18,6 +18,10 @@ RSpec.describe Numbers do
 			number.roman_math("X + X - X")
 			expect(number.operators).to eq(["+", "-"])
 		end
+		it "converts roman numerals to integers" do
+			number.roman_math("X + X")
+			expect(number.unromanized_values).to eq([10, 10])
+		end
 	end
 
 	describe "#unromanize" do

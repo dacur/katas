@@ -1,5 +1,5 @@
 class Numbers
-	attr_accessor :roman_math, :equation, :values, :operators
+	attr_accessor :roman_math, :equation, :values, :operators, :unromanized_values
 	attr_reader :unromanize
 
 	def romanize(number)
@@ -17,6 +17,7 @@ class Numbers
 		@equation = equation.split(" ")
 		@values = @equation.select.each_with_index { |_, i| i.even? }
 		@operators = @equation.select.each_with_index { |_, i| i.odd? }
+		@unromanized_values = @values.map{ |x| unromanize(x)}
 	end
 
 	def unromanize(roman_numeral)
