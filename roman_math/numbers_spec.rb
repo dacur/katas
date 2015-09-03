@@ -22,6 +22,13 @@ RSpec.describe Numbers do
 			number.roman_math("X + X")
 			expect(number.unromanized_values).to eq([10, 10])
 		end
+		it "converts the equation back into a string" do
+			number.roman_math("X + X")
+			expect(number.returned_value).to eq("10 + 10")
+		end
+		it "does the math" do
+			expect(number.roman_math("X + X")).to eq(20)
+		end
 	end
 
 	describe "#unromanize" do
