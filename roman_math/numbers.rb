@@ -27,27 +27,6 @@ class Numbers
 		}
 		@equation = @equation.join		
 		eval(@equation)
-			
-
-
-
-
-
-		# until @operators == [] do
-		# 	y = @unromanized_values.shift.to_s + @operators.shift
-		# 	@returned_value += y
-		# end
-		# @returned_value += @unromanized_values.shift.to_s
-		# eval(@returned_value)
-
-
-		# Write function that considers order of operations
-		# returned_value = @unromanized_values[0].send(@operators[0], @unromanized_values[1])
-		# if @unromanized_values.length > 2
-		# 	(@unromanized_values.length)-1.times do 
-		# 		returned_value = returned_value.send()
-		#   **** maybe pluck each one out of the array until it's empty???
-		# 	end
 	end
 
 	def unromanize(roman_numeral)
