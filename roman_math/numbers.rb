@@ -1,21 +1,22 @@
 class Numbers
-	attr_accessor :roman_math, :equation, :values, :operators, :unromanized_values, :returned_value
-	attr_reader :unromanize
+	attr_reader :values, :operators, :evaluate_equation
+	attr_accessor :equation 
 
 	def roman_math(equation)
 		@equation = equation.split(" ")
 		@values = @equation.select.each_with_index { |_, i| i.even? }
 		@operators = @equation.select.each_with_index { |_, i| i.odd? }
-		@unromanized_values = @values.map{ |x| unromanize(x)}	
+		unromanized_values = @values.map{ |x| unromanize(x)}	
 		
 		# loop through @equation and replace RNs with integers
-		@equation.each_with_index {|val, index|  
+		@equation.each_with_index do |val, index|  
 			if index.even?
-				@equation[index] = @unromanized_values.shift
+				@equation[index] = unromanized_values.shift
 			end
-		}
-		@equation = @equation.join		
-		eval(@equation)
+		end
+		# @equation = @equation.join		
+		# eval(@equation)
+		evaluate_equation
 	end
 
 	def unromanize(roman_numeral)
@@ -23,4 +24,47 @@ class Numbers
 			"VII" => 7, "VIII" => 8, "IX" => 9, "X" => 10, "L" => 50}
 		rn[roman_numeral]
 	end
+
+	def evaluate_equation
+		# [1, "+", 3, "*", 5]
+		# order of operation
+		# using send
+		while @equation.include? "*" do
+			op = @equation.index("*") 
+			newval = @equation[op-1].send(@equation[op], @equation[op+1])
+			@equation[op] = newval
+			@equation.slice!(op-1)
+			@equation.slice!(op)
+		end
+		while @equation.include? "/" do
+			op = @equation.index("/") 
+			newval = @equation[op-1].send(@equation[op], @equation[op+1])
+			@equation[op] = newval
+			@equation.slice!(op-1)
+			@equation.slice!(op)
+		end
+		while @equation.include? "-" do
+			op = @equation.index("-") 
+			newval = @equation[op-1].send(@equation[op], @equation[op+1])
+			@equation[op] = newval
+			@equation.slice!(op-1)
+			@equation.slice!(op)
+		end
+		while @equation.include? "+" do
+			op = @equation.index("+") 
+			newval = @equation[op-1].send(@equation[op], @equation[op+1])
+			@equation[op] = newval
+			@equation.slice!(op-1)
+			@equation.slice!(op)
+		end
+
+		@equation = @equation[0]
+	end
+
 end
+
+
+
+
+
+
