@@ -14,13 +14,6 @@ RSpec.describe Numbers do
 		it "does the math" do
 			number.roman_math("X + X")
 			expect(number.equation).to eq(20)
-			
-			# expect(number.roman_math("X + X")).to eq(20)
-			# expect(number.roman_math("X + X * IV")).to eq(50)
-			# expect(number.roman_math("X + X * IV - III")).to eq(47)
-			# expect(number.roman_math("X * X / II")).to eq(50)
-			# expect(number.roman_math("X * X * II")).to eq(200)
-			# expect(number.roman_math("L / V")).to eq(10)
 		end
 		it "does more math" do
 			number.roman_math("X + X * IV")

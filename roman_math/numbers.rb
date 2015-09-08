@@ -57,7 +57,6 @@ class Numbers
 			@equation.slice!(op-1)
 			@equation.slice!(op)
 		end
-
 		@equation = @equation[0]
 	end
 
