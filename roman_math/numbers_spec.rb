@@ -45,13 +45,11 @@ RSpec.describe Numbers do
 
 	describe "#evaluate_equation" do
 		it "takes an equation as an array and evaluates the equation" do
-			# allow(number).to receive(:equation).with([1, "*", 3])
 			number.equation = [1, "*", 3]
 			number.evaluate_equation
 			expect(number.equation).to eq(3)
 		end
 		it "takes an equation as an array and evaluates the equation" do
-			# allow(number).to receive(:equation).with([1, "*", 3])
 			number.equation = [1, "+", 3, "+", 9]
 			number.evaluate_equation
 			expect(number.equation).to eq(13)

@@ -8,14 +8,11 @@ class Numbers
 		@operators = @equation.select.each_with_index { |_, i| i.odd? }
 		unromanized_values = @values.map{ |x| unromanize(x)}	
 		
-		# loop through @equation and replace RNs with integers
 		@equation.each_with_index do |val, index|  
 			if index.even?
 				@equation[index] = unromanized_values.shift
 			end
 		end
-		# @equation = @equation.join		
-		# eval(@equation)
 		evaluate_equation
 	end
 
@@ -26,9 +23,6 @@ class Numbers
 	end
 
 	def evaluate_equation
-		# [1, "+", 3, "*", 5]
-		# order of operation
-		# using send
 		while @equation.include? "*" do
 			op = @equation.index("*") 
 			newval = @equation[op-1].send(@equation[op], @equation[op+1])
