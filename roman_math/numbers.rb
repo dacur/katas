@@ -24,34 +24,25 @@ class Numbers
 
 	def evaluate_equation
 		while @equation.include? "*" do
-			op = @equation.index("*") 
-			newval = @equation[op-1].send(@equation[op], @equation[op+1])
-			@equation[op] = newval
-			@equation.slice!(op-1)
-			@equation.slice!(op)
+			perform_math(@equation.index("*"))
 		end
 		while @equation.include? "/" do
-			op = @equation.index("/") 
-			newval = @equation[op-1].send(@equation[op], @equation[op+1])
-			@equation[op] = newval
-			@equation.slice!(op-1)
-			@equation.slice!(op)
+			perform_math(@equation.index("/"))
 		end
 		while @equation.include? "-" do
-			op = @equation.index("-") 
-			newval = @equation[op-1].send(@equation[op], @equation[op+1])
-			@equation[op] = newval
-			@equation.slice!(op-1)
-			@equation.slice!(op)
+			perform_math(@equation.index("-"))
 		end
 		while @equation.include? "+" do
-			op = @equation.index("+") 
-			newval = @equation[op-1].send(@equation[op], @equation[op+1])
-			@equation[op] = newval
-			@equation.slice!(op-1)
-			@equation.slice!(op)
+			perform_math(@equation.index("+"))
 		end
 		@equation = @equation[0]
+	end
+
+	def perform_math(op)
+		newval = @equation[op-1].send(@equation[op], @equation[op+1])
+		@equation[op] = newval
+		@equation.slice!(op-1)
+		@equation.slice!(op)
 	end
 
 end
