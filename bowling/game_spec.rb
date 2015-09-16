@@ -57,8 +57,5 @@ RSpec.describe Game do
         expect(game.score).to eq(286)
       end
     end
-    ### strike works
-    ### spare works
-    ### another score works
   end
 end

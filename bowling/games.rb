@@ -1,18 +1,13 @@
 class Game
   attr_accessor :score_hash
-  # [ [10], [5,3], [10], [9,1], [6,1] ]
-  # [18, 8, 20, 17, 7 ]
 
   def initialize
     @score_hash = []
   end
 
   def roll(pins)
-    # byebug
     last = @score_hash.last
-    if @score_hash.length >= 10
-      @score_hash.last << pins
-    elsif @score_hash == [] || last.length == 2 || last == [10]
+    if (@score_hash == [] || last.length == 2 || last == [10]) && score_hash.length < 10
       @score_hash << [pins]
     else
       @score_hash.last << pins
@@ -30,20 +25,23 @@ class Game
           # this is a single strike
             10 + @score_hash[index+1][0] + @score_hash[index+1][1]
           end
-        elsif s.inject(:+) == 10
+        elsif sum(s) == 10
           # this frame plus next roll 
           10 + @score_hash[index+1].first
         else
           # this frame only
-          s.inject(:+)
+          sum(s)
         end
       else
-        s.inject(:+)
+        sum(s)
       end
     end
-
-    # byebug
-    score_array.inject(:+)
+    sum(score_array)
   end
 
+  private
+
+  def sum(a)
+    a.inject(:+)
+  end
 end
