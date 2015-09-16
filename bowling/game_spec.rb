@@ -1,5 +1,6 @@
 require './games.rb'
-# require 'byebug'
+require 'byebug'
+require 'pp'
 
 RSpec.describe Game do
   subject(:game) { Game.new }
@@ -25,6 +26,36 @@ RSpec.describe Game do
       game.roll(5)
       game.roll(1)
       expect(game.score).to eq(47)
+    end
+    it "handles a spare" do
+      game.roll(5)
+      game.roll(5)
+      game.roll(7)
+      game.roll(2)
+      expect(game.score).to eq(26)
+    end
+    context "last frame" do
+      it "handles a perfect game" do
+        12.times { game.roll(10) }
+        expect(game.score).to eq(300)
+      end
+      it "handles a strike and 7" do
+        11.times { game.roll(10) }
+        game.roll(7)
+        expect(game.score).to eq(297)
+      end
+      it "handles a strike and a spare" do
+        10.times { game.roll(10) }
+        game.roll(7)
+        game.roll(3)
+        expect(game.score).to eq(287)
+      end
+      it "handles a strike and a 7 and 2" do
+        10.times { game.roll(10) }
+        game.roll(7)
+        game.roll(2)
+        expect(game.score).to eq(286)
+      end
     end
     ### strike works
     ### spare works
