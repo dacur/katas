@@ -1,39 +1,34 @@
 class Game
-  attr_accessor :score_hash
+  attr_accessor :rolls_array
 
   def initialize
-    @score_hash = []
+    @rolls_array = []
   end
 
   def roll(pins)
-    last = @score_hash.last
-    if (@score_hash == [] || last.length == 2 || last == [10]) && score_hash.length < 10
-      @score_hash << [pins]
+    if (new_game? || full_frame?) && rolls_array.length < 10
+      @rolls_array << [pins]
     else
-      @score_hash.last << pins
+      @rolls_array.last << pins
     end
   end
 
   def score
-    score_array = @score_hash.each_with_index.map do |s, index|
+    score_array = @rolls_array.each_with_index.map do |frame, index|
       if index < 9 
-        if s == [10]
-          if @score_hash[index+1] == [10]
-            # this is a double strike
-            20 + @score_hash[index+2].first
+        if strike?(frame)
+          if strike?(@rolls_array[index+1])
+            20 + @rolls_array[index+2].first
           else
-          # this is a single strike
-            10 + @score_hash[index+1][0] + @score_hash[index+1][1]
+            10 + next_frame(index)
           end
-        elsif sum(s) == 10
-          # this frame plus next roll 
-          10 + @score_hash[index+1].first
+        elsif spare?(frame) 
+          10 + next_roll(index)
         else
-          # this frame only
-          sum(s)
+          sum(frame)
         end
       else
-        sum(s)
+        sum(frame)
       end
     end
     sum(score_array)
@@ -41,7 +36,34 @@ class Game
 
   private
 
+  def strike?(frame)
+    frame == [10]
+  end
+
+  def spare?(frame)
+    sum(frame) == 10
+  end
+
+  def next_roll(index)
+    @rolls_array[index+1][0]
+  end
+
+  def next_frame(index)
+    next_roll(index) + rolls_array[index+1][1]
+  end
+
+  def new_game?
+    @rolls_array == []
+  end
+
+  def full_frame?
+    @rolls_array.last.length == 2 || @rolls_array.last == [10]
+  end
+
   def sum(a)
     a.inject(:+)
   end
 end
+
+
+
